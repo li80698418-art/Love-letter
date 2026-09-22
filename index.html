@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给冯俊喆的一封信</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Songti SC', 'SimSun', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 30%, #4a2c6d 60%, #6b3fa0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 星空背景 */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* 爱心粒子 */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        /* 主卡片 */
+        .letter-card {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 光晕效果 */
+        .letter-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 24px;
+            background: linear-gradient(45deg, rgba(255, 182, 193, 0.3), rgba(255, 105, 180, 0.2), rgba(147, 112, 219, 0.3));
+            z-index: -1;
+            filter: blur(15px);
+            animation: glow 4s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* 标题 */
+        .title {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 30px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(255, 182, 193, 0.6);
+            font-weight: 300;
+        }
+
+        .title span {
+            background: linear-gradient(135deg, #ffb6c1, #ff69b4, #dda0dd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* 分隔线 */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ffb6c1, transparent);
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .divider::after {
+            content: '✦';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffb6c1;
+            font-size: 14px;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.8);
+        }
+
+        /* 正文 */
+        .content {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 2.2;
+            font-size: 1.1rem;
+            text-align: left;
+            padding: 0 10px;
+        }
+
+        .quote {
+            border-left: 3px solid rgba(255, 182, 193, 0.5);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1.05rem;
+            line-height: 2;
+        }
+
+        .highlight {
+            color: #ffb6c1;
+            font-weight: 500;
+            text-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .signature::before {
+            content: '—— ';
+        }
+
+        /* 底部爱心 */
+        .footer-heart {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #ffb6c1;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.15); }
+            40% { transform: scale(0.95); }
+            60% { transform: scale(1.1); }
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .letter-card {
+                padding: 30px 20px;
+                border-radius: 16px;
+            }
+            .title {
+                font-size: 1.6rem;
+                letter-spacing: 2px;
+            }
+            .content {
+                font-size: 1rem;
+                line-height: 2;
+            }
+            .quote {
+                padding-left: 15px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* 鼠标悬停效果 */
+        .letter-card:hover {
+            border-color: rgba(255, 182, 193, 0.3);
+            box-shadow: 0 20px 60px rgba(255, 105, 180, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 星空背景 -->
+    <div class="stars" id="stars"></div>
+
+    <!-- 飘浮爱心 -->
+    <div class="hearts" id="hearts"></div>
+
+    <!-- 表白卡片 -->
+    <div class="letter-card">
+        <h1 class="title">Dear <span>冯俊喆</span></h1>
+        <div class="divider"></div>
+        <div class="content">
+            <p>《怦然心动》里有一段我很喜欢的话：</p>
+            <div class="quote">
+                “我从来不期待你给我的是什么结局，我只希望在未来到达之前，在我还没有太多勇气的时候，在我最喜欢你的这一刻，把我想说的话，都慢慢告诉你。”
+            </div>
+            <p>我想告诉你，你是我遇到的<span class="highlight">命运的礼物</span>，是我不可多得的<span class="highlight">蜜糖</span>。</p>
+            <p style="margin-top: 20px;">我曾用很多种方式让自己别太靠近，可到最后，我还是希望你知道：</p>
+            <p style="margin-top: 20px;">这份心意，我<span class="highlight">认真过</span>，也<span class="highlight">珍惜过</span>。</p>
+        </div>
+        <div class="signature">李雷</div>
+        <div class="footer-heart">❤</div>
+    </div>
+
+    <script>
+        // 生成星星
+        function createStars() {
+            const container = document.getElementById('stars');
+            const count = 100;
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (2 + Math.random() * 3) + 's';
+                star.style.width = (1 + Math.random() * 3) + 'px';
+                star.style.height = star.style.width;
+                container.appendChild(star);
+            }
+        }
+
+        // 生成飘浮爱心
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const emojis = ['❤', '💖', '💕', '💗', '💓', '💘', '🩷'];
+            const count = 20;
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.fontSize = (12 + Math.random() * 25) + 'px';
+                heart.style.animationDuration = (8 + Math.random() * 10) + 's';
+                heart.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        createStars();
+        createHearts();
+    </script>
+</body>
+</html>
